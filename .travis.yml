@@ -1,0 +1,18 @@
+language: python
+python:
+  - 2.6
+  - 2.7
+  - 3.3
+  - 3.4
+  - 3.5
+  - pypy
+  - pypy3
+install:
+- python setup.py develop
+- pip install querystringsafe_base64[tests]
+- pip install coveralls
+script:
+- py.test --verbose --capture=no --showlocals --cov src/querystringsafe_base64
+- pylama
+after_success:
+- coveralls
