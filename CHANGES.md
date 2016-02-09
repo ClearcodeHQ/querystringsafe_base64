@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+* Install pandoc (travis)
+
 ## 0.1.2
 
 * Add setup.cfg and pypandoc to tests

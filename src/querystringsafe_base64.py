@@ -21,7 +21,7 @@
 
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 
 def encode(to_encode):
