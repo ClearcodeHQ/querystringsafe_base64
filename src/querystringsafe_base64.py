@@ -37,7 +37,7 @@ def encode(to_encode):
         string - like base64, except characters ['+', '/', '='] are
         replaced with ['-', '_', '.'] consequently
     """
-    return urlsafe_b64encode(to_encode).replace('=', '.')
+    return urlsafe_b64encode(bytes(to_encode)).replace('=', '.')
 
 
 def decode(encoded):

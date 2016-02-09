@@ -21,7 +21,10 @@
 
 from base64 import b64encode, b64decode, urlsafe_b64decode
 import string
-from urllib import quote_plus, unquote_plus
+try:
+    from urllib import quote_plus, unquote_plus
+except ImportError:
+    from urllib.parse import quote_plus, unquote_plus
 
 import pytest
 import querystringsafe_base64
@@ -32,7 +35,7 @@ import querystringsafe_base64
 url_unsafe_string_short = b64decode('aDaF+/===')  # Unsafe chars: +, /, =
 
 # Creating a synthetic base64 that contains all base64 characters:
-base64_alphabet = string.letters + string.digits + '+/'
+base64_alphabet = string.ascii_letters + string.digits + '+/'
 assert len(base64_alphabet) == 64
 # base64 alphabet is already a valid base64 string but it does not contain
 # all allowed characters - '=' (padding) is missing. So add it.
