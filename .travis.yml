@@ -1,25 +1,25 @@
 language: python
 python:
-- 2.6
-- 2.7
-- 3.3
-- 3.4
-- 3.5
-- pypy
-- pypy3
+    - 2.6
+    - 2.7
+    - 3.3
+    - 3.4
+    - 3.5
+    - pypy
+    - pypy3
 install:
-- python setup.py develop
-- pip install querystringsafe_base64[tests]
-- pip install coveralls
-- pip install wheel
-# Stolen from https://github.com/yihui/knitr/blob/master/.travis.yml
-- "[ ! -d ~/bin ] && mkdir ~/bin || true"
-- "wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc | bash"
+    - python setup.py develop
+    - pip install querystringsafe_base64[tests]
+    - pip install coveralls
+    - pip install wheel
+    # Stolen from https://github.com/yihui/knitr/blob/master/.travis.yml
+    - "[ ! -d ~/bin ] && mkdir ~/bin || true"
+    - "wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc | bash"
 script:
-- py.test --verbose --capture=no --showlocals --cov src/querystringsafe_base64
-- pylama
+    - py.test --verbose --capture=no --showlocals --cov querystringsafe_base64
+    - pylama
 after_success:
-- coveralls
+    - coveralls
 matrix:
   allow_failures:
     - python: 3.3
@@ -35,4 +35,4 @@ deploy:
     tags: true
     all_branches: true
     repo: ClearcodeHQ/querystringsafe_base64
-  distributions: sdist bdist_wheel
+  distributions: sdist
