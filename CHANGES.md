@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+* Remove bdist_wheel from distributons
+
 ## 0.1.3
 
 * Install pandoc (travis)
