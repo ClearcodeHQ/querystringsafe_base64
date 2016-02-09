@@ -32,13 +32,28 @@ with open(
         r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
 
 
-def read(fname):
-    """
-    Read filename.
+try:
+    from pypandoc import convert
 
-    :param str fname: name of a file to read
-    """
-    return open(os.path.join(here, fname)).read()
+    def read(fname):
+        """
+        Read filename.
+
+        :param str fname: name of a file to read
+        """
+        return convert(os.path.join(here, fname), 'rst')
+except ImportError:
+    print(
+        "warning: pypandoc module not found, could not convert Markdown to RST"
+    )
+
+    def read(fname):
+        """
+        Read filename.
+
+        :param str fname: name of a file to read
+        """
+        return open(os.path.join(here, fname)).read()
 
 
 test_requires = [
@@ -47,6 +62,9 @@ test_requires = [
     'pylama',
 ]
 
+extras_require = {
+    'tests': test_requires
+}
 
 setup(
     name='querystringsafe_base64',
@@ -63,6 +81,7 @@ setup(
     url='https://github.com/ClearcodeHQ/querystringsafe_base64',
     include_package_data=True,
     install_requires=[],
+    extras_require=extras_require,
     tests_require=test_requires,
     zip_safe=False,
 

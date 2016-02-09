@@ -16,14 +16,14 @@ Encoding and decoding arbitrary strings into strings that are safe to put into a
 
 And there are 2 problems with that
 
-1. `=` sign gets quoted:
+I. `=` sign gets quoted:
 
     >>> import urllib
 
     >>> urllib.quote('=')
     '%3D'
 
-2. Some libraries tolerate the `=` in query string values:
+II. Some libraries tolerate the `=` in query string values:
 
     >>> from urlparse import urlsplit, parse_qs
 
