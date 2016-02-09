@@ -1,0 +1,2 @@
+include *.md *.py
+recursive-include src *.py

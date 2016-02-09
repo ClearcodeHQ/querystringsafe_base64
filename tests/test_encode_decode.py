@@ -28,7 +28,6 @@ except ImportError:
     from urllib.parse import quote_plus, unquote_plus
 
 import pytest
-from IPython import embed; embed()
 import querystringsafe_base64
 
 PY2 = sys.version_info < (3, 0)
