@@ -19,9 +19,12 @@
 # along with querystringsafe_base64. If not, see <http://www.gnu.org/licenses/
 """Main querystringsafe_base64 module."""
 
+import sys
+
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 
 __version__ = '0.1.0'
+PY2 = sys.version_info < (3, 0)
 
 
 def encode(to_encode):
@@ -37,7 +40,10 @@ def encode(to_encode):
         string - like base64, except characters ['+', '/', '='] are
         replaced with ['-', '_', '.'] consequently
     """
-    return urlsafe_b64encode(bytes(to_encode)).replace('=', '.')
+    if PY2:
+        return urlsafe_b64encode(to_encode).replace('=', '.')
+    else:
+        return urlsafe_b64encode(to_encode.encode('UTF-8')).decode('UTF-8').replace('=', '.')
 
 
 def decode(encoded):
@@ -57,4 +63,7 @@ def decode(encoded):
     # If unicode comes in, strange TypeError is thrown from unicode.translate
     # because it differs from str.translate. Base64 and querystringsafe_base64
     # are ascii-compatible anyway so convert to str.
-    return urlsafe_b64decode(str(encoded).replace('.', '='))
+    if PY2:
+        return urlsafe_b64decode(str(encoded).replace('.', '='))
+    else:
+        return urlsafe_b64decode(encoded.replace('.', '=').encode('UTF-8')).decode('UTF-8')

@@ -19,6 +19,7 @@
 # along with querystringsafe_base64. If not, see <http://www.gnu.org/licenses/
 """querystringsafe_base64's tests."""
 
+import sys
 from base64 import b64encode, b64decode, urlsafe_b64decode
 import string
 try:
@@ -27,12 +28,18 @@ except ImportError:
     from urllib.parse import quote_plus, unquote_plus
 
 import pytest
+from IPython import embed; embed()
 import querystringsafe_base64
+
+PY2 = sys.version_info < (3, 0)
 
 # We want to test querystringsafe_base64.encode with a string that normally
 # encodes to a URL-unsafe base64 so we obtain it by decoding a manually created
 # base64 string with all the unsafe chars.
-url_unsafe_string_short = b64decode('aDaF+/===')  # Unsafe chars: +, /, =
+if PY2:
+    url_unsafe_string_short = b64decode('aDaF+/===')  # Unsafe chars: +, /, =
+else:
+    url_unsafe_string_short = b64decode('aDbChcO7'.encode('UTF-8')).decode('UTF-8')  # Unsafe chars: +, /, =
 
 # Creating a synthetic base64 that contains all base64 characters:
 base64_alphabet = string.ascii_letters + string.digits + '+/'
@@ -40,9 +47,14 @@ assert len(base64_alphabet) == 64
 # base64 alphabet is already a valid base64 string but it does not contain
 # all allowed characters - '=' (padding) is missing. So add it.
 base64_string_with_all_allowed_chars = base64_alphabet + 'aa=='
-string_encoding_to_base64_with_all_allowed_characters = b64decode(
-    base64_string_with_all_allowed_chars
-)
+if PY2:
+    string_encoding_to_base64_with_all_allowed_characters = b64decode(
+        base64_string_with_all_allowed_chars
+    )
+else:
+    string_encoding_to_base64_with_all_allowed_characters = b64decode(
+        b64encode(base64_string_with_all_allowed_chars.encode('UTF-8')).decode('UTF-8')
+    ).decode()
 
 # Strings to test with. They decode to base64 that would be unsafe in url and
 # would have to be escaped. The short string, unlike the long one, will be
@@ -88,7 +100,6 @@ def test_decode_accepts_regular_base64():
     # Check if we test with a regular base64 that has all the unsafe chars:
     for char in ['+', '/', '=']:
         assert char in base64_string_with_all_allowed_chars
-
     assert (
         querystringsafe_base64.decode(
             base64_string_with_all_allowed_chars
