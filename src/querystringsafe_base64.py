@@ -23,7 +23,7 @@ import sys
 
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 
-__version__ = '0.1.0'
+__version__ = '0.1.3'
 PY2 = sys.version_info < (3, 0)
 
 

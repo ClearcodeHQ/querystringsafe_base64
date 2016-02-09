@@ -60,6 +60,7 @@ test_requires = [
     'pytest',
     'pytest-cov',
     'pylama',
+    'pypandoc',
 ]
 
 extras_require = {
