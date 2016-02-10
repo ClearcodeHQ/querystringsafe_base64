@@ -21,12 +21,12 @@
 
 import os
 import re
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
 here = os.path.dirname(__file__)
 with open(
-    os.path.join(here, 'src', 'querystringsafe_base64.py')
+    os.path.join(here, 'querystringsafe_base64.py')
 ) as v_file:
     package_version = re.compile(
         r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
@@ -76,8 +76,7 @@ setup(
     'that are safe to put into a URL query param.',
     long_description=read('README.md'),
 
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
+    py_modules=['querystringsafe_base64', ],
 
     url='https://github.com/ClearcodeHQ/querystringsafe_base64',
     include_package_data=True,
