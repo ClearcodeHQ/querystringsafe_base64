@@ -8,7 +8,7 @@ python:
     - pypy
     - pypy3
 install:
-    - python setup.py develop
+    - python setup.py install
     - pip install querystringsafe_base64[tests]
     - pip install coveralls
     - pip install wheel
@@ -35,4 +35,3 @@ deploy:
     tags: true
     all_branches: true
     repo: ClearcodeHQ/querystringsafe_base64
-  distributions: sdist
