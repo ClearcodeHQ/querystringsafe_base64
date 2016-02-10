@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+* Support for python3
+
 ## 0.1.5
 
 * Move querystringsafe_base64 module to the root
