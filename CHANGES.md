@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.5
+
+* Move querystringsafe_base64 module to the root
+* Use install instead of develop during tests
+
 ## 0.1.4
 
 * Remove bdist_wheel from distributons
