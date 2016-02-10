@@ -106,10 +106,7 @@ def test_querystringsafe_base64_decode_handles_unicode():
     base64dotted_unicode = u'DD..'
     base64dotted_str = str(base64_unicode)
 
-    # urlsafe_b64decode can handle str but breaks on unicode.
     decoded_str = urlsafe_b64decode(base64_str)
-    with pytest.raises(TypeError):
-        urlsafe_b64decode(base64_unicode)
 
     # querystringsafe_base64.decode handles str and unicode in both formats.
     assert querystringsafe_base64.decode(base64_unicode) == decoded_str
