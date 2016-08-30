@@ -1,33 +1,33 @@
 language: python
 python:
-    - 2.6
-    - 2.7
-    - 3.3
-    - 3.4
-    - 3.5
-    - pypy
-    - pypy3
+- 2.6
+- 2.7
+- 3.3
+- 3.4
+- 3.5
+- pypy
+- pypy3
 install:
-    - python setup.py install
-    - pip install querystringsafe_base64[tests]
-    - pip install coveralls
-    - pip install wheel
-    # Stolen from https://github.com/yihui/knitr/blob/master/.travis.yml
-    - "[ ! -d ~/bin ] && mkdir ~/bin || true"
-    - "wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc | bash"
+- python setup.py install
+- pip install querystringsafe_base64[tests]
+- pip install coveralls
+- pip install wheel
+- "[ ! -d ~/bin ] && mkdir ~/bin || true"
+- wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc
+  | bash
 script:
-    - py.test --verbose --capture=no --showlocals --cov querystringsafe_base64
-    - pylama
+- py.test --verbose --capture=no --showlocals --cov querystringsafe_base64
+- pylama
 after_success:
-    - coveralls
+- coveralls
 matrix:
   allow_failures:
-    - python: pypy3
+  - python: pypy3
 deploy:
   provider: pypi
   user: thearoom
   password:
-    secure: WNdBUpskxV1qlcFv/HPWqy0fdOlNKdts135BKkKuu3ZU6y+89K4GSju7TgtVztIapod6HNW+QcER6z27lABkZ6Pgh/RU07REVJukZK3/DTlTrUKKHkepBM3tOLtw3zxwYdop9/iqxuzn1WBO8FEFSUG5b2m1Pvywk0MUF99czBV6osd4cOi0x3Twz/IItxRWaRsSnBe5DMwkhToIhkA1K/9SxgDNc703yvKmgitcN0ZYiLr9ngMron31NCKFqPLOp2EtNXxgae2rMKePbPZgFx+eBQb1cOlyPjolZ8G8joLLS/0vEStbA5xSdqyljF2T06PSRl+EjLjx/56tcTsEi/L9gt6E20uweo7XOI1pI6NaDpP7mrEPi4s8X4ZHHMkrzV0k+0FQvC7MxCMbFQCMtfHl9u16f7lJ51vyfixTEx3okRKVoNjbb6qj2ki/HAwAHA1xECbgOIS+bfRikAgPZF7WnL5ROAWiHJGDwrKH5Gh6z8w7yive8I+lhT6PP6uyfDoZPI88JBXYPOTnP0asR81TvP3d6uH0LOIpuwvlsHWVFSFRuF/NoJ1+bnGBWwMz0LpEqCzuMvepPYx2LE2EPVRoyl75ie3uqn4jNx8njb0jeQCDHs9CBNVFutu9wo6qiRKkDlz0TC7Q61dECVZAYXEL0QgdecPGX8+0/HrFzqM=
+    secure: QYKFZY9275pqfhIAJDY7iGxTBH5UvUfOL1LnN5zoPwqH+YE7dG22/FeSsyC4NVxotIyrAkbTJ0sPlYoTb7xXnWclqxA6Zv8tlHK3IjuCEBWnzaDtQ2JVkbbeFM+qmkyNbEZI7l/C91RcvowW8JsluBEZEBwtA2RqlSUSgWxNX11V/J6jUSG+wRJa4MLrFJTWdgyZGzyJAwtueNxFH4W52jPGkZJ4vJxzT3IOMZdwfxFYE2TQ9hLneB8p2Ls3t9yth4Z737YAf3gPhU8xSuOsTLpUN5M7w8RaiGb2JuR8cADiNXQ+1uVtEqmYM+AOFLQCkrP21f/xiJYpu+xehdbc1CAgXQzdtgtF/QoKRzmtBx3yqUaulg29jhRlgotQnlA0uyd1Fh7WDsOhDXK/aMEP2/10Gl/KnH5KRgvTzDzw2YYXjAZqJ50DI2ku9hZDbl/W/e3fTovGiRnXfwL5Yfjh1o5TP66wNH3xE5a1yR7N3oE1raqwILjy3zCAh27izcBK/Kc1S8LACAvLAPBdRh5kW1+2C709DdX62ekQWGcLfNJhg7ZJ7gL+CrszZ3mjz1SAqYx6LWNSjxFI59t7HZarWrMmMptFffVQlwv7mPi6myKiOdXxo+JEoJNBk7q01slJeqoapdrhiywekjyOcUFqLsq8LLiwBT4pYJKfKhMBPRY=
   on:
     tags: true
     all_branches: true
