@@ -15,9 +15,14 @@ install:
 - "[ ! -d ~/bin ] && mkdir ~/bin || true"
 - wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc
   | bash
+- if [[ "$TRAVIS_PYTHON_VERSION" == 3* ]]; then pip install mypy-lang; fi
 script:
 - py.test --verbose --capture=no --showlocals --cov querystringsafe_base64
 - pylama
+- if [[ "$TRAVIS_PYTHON_VERSION" == 3* ]]; then
+    mypy querystringsafe_base64.py tests;
+    mypy --py2 querystringsafe_base64.py tests;
+  fi
 after_success:
 - coveralls
 matrix:

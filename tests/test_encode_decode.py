@@ -21,12 +21,13 @@
 
 from base64 import b64encode, b64decode, urlsafe_b64decode
 import string
-try:
+import sys
+if sys.version_info < (3, 0):
     from urllib import quote_plus, unquote_plus
-except ImportError:
+else:
     from urllib.parse import quote_plus, unquote_plus
 
-import pytest
+import pytest  # type: ignore
 import querystringsafe_base64
 
 # We want to test querystringsafe_base64.encode with a string that normally
