@@ -23,34 +23,38 @@ import sys
 from base64 import urlsafe_b64encode, urlsafe_b64decode
 
 __version__ = '0.2.0'
-PY2 = sys.version_info < (3, 0)
+
+if not sys.version_info < (3, 0):
+    unicode = str
 
 
 def encode(to_encode):
+    # type: (bytes) -> unicode
     """
-    Encode an arbitrary string as a base64 that is safe to put as a URL query value.
+    Encode an arbitrary bytestring as a base64 that is safe to put as a URL query value.
 
     urllib.quote and urllib.quote_plus do not have any effect on the
     result of querystringsafe_base64.encode.
 
-    :param (str, bytes) to_encode:
+    :param bytes to_encode:
     :rtype: str
     :return: a string that is safe to put as a value in an URL query
         string - like base64, except characters ['+', '/', '='] are
         replaced with ['-', '_', '.'] consequently
     """
     encoded = urlsafe_b64encode(to_encode).replace(b'=', b'.')
-    if PY2:
+    if sys.version_info < (3, 0):
         return encoded
     return encoded.decode()
 
 
 def decode(encoded):
+    # type: (unicode) -> bytes
     """
     Decode the result of querystringsafe_base64_encode or a regular base64.
 
     .. note ::
-        As a regular base64 string does not contain dots, replcing dots with
+        As a regular base64 string does not contain dots, replacing dots with
         equal signs does basically noting to it. Also,
         base64.urlsafe_b64decode allows to decode both safe and unsafe base64.
         Therefore this function may also be used to decode the regular base64.
@@ -59,6 +63,7 @@ def decode(encoded):
     :rtype: str, bytes
     :return: decoded string
     """
-    if PY2:
+    if sys.version_info < (3, 0):
         return urlsafe_b64decode(str(encoded).replace('.', '='))
-    return urlsafe_b64decode(bytes(encoded, 'ascii').replace(b'.', b'='))
+    else:
+        return urlsafe_b64decode(bytes(encoded, 'ascii').replace(b'.', b'='))

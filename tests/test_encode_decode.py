@@ -21,18 +21,19 @@
 
 from base64 import b64encode, b64decode, urlsafe_b64decode
 import string
-try:
+import sys
+if sys.version_info < (3, 0):
     from urllib import quote_plus, unquote_plus
-except ImportError:
+else:
     from urllib.parse import quote_plus, unquote_plus
 
-import pytest
+import pytest  # type: ignore
 import querystringsafe_base64
 
 # We want to test querystringsafe_base64.encode with a string that normally
 # encodes to a URL-unsafe base64 so we obtain it by decoding a manually created
 # base64 string with all the unsafe chars.
-url_unsafe_string_short = b64decode('aDaF+/===')  # Unsafe chars: +, /, =
+url_unsafe_string_short = b64decode(b'aDaF+/===')  # Unsafe chars: +, /, =
 
 # Creating a synthetic base64 that contains all base64 characters:
 base64_alphabet = string.ascii_letters + string.digits + '+/'
@@ -41,7 +42,7 @@ assert len(base64_alphabet) == 64
 # all allowed characters - '=' (padding) is missing. So add it.
 base64_string_with_all_allowed_chars = base64_alphabet + 'aa=='
 string_encoding_to_base64_with_all_allowed_characters = b64decode(
-    base64_string_with_all_allowed_chars
+    base64_string_with_all_allowed_chars.encode('ascii')
 )
 
 # Strings to test with. They decode to base64 that would be unsafe in url and
