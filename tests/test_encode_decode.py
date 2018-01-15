@@ -134,6 +134,7 @@ def test_encode_decode_unpad(string_num):
     """Check if querystringsafe_base64.encode can be reverted by querystringsafe_base64.decode with padding removed."""
     original = test_strings[string_num]
 
-    encoded = querystringsafe_base64.encode(original).rstrip('.')
-    decoded = querystringsafe_base64.decode(encoded)
+    encoded = querystringsafe_base64.encode(original)
+    assert encoded.endswith('.')  # make sure it ends with padding for this test
+    decoded = querystringsafe_base64.decode(encoded.rstrip())
     assert decoded == original
