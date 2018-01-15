@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 1.0.0
 
 * support for restore missing padding during decode process
 
