@@ -26,6 +26,24 @@ __version__ = '0.2.0'
 PY2 = sys.version_info < (3, 0)
 
 
+def fill_padding(padded_string):
+    """
+    Fill up missing padding in a string.
+
+    This function makes sure that the string has length which is multiplication of 4,
+    and if not, fills the missing places with dots.
+
+    :param str padded_string: string to be decoded that might miss padding dots.
+    :return: properly padded string
+    :rtype: str
+    """
+    length = len(padded_string)
+    reminder = len(padded_string) % 4
+    if reminder:
+        return padded_string.ljust(length + 4 - reminder, '.')
+    return padded_string
+
+
 def encode(to_encode):
     """
     Encode an arbitrary string as a base64 that is safe to put as a URL query value.
@@ -50,7 +68,7 @@ def decode(encoded):
     Decode the result of querystringsafe_base64_encode or a regular base64.
 
     .. note ::
-        As a regular base64 string does not contain dots, replcing dots with
+        As a regular base64 string does not contain dots, replacing dots with
         equal signs does basically noting to it. Also,
         base64.urlsafe_b64decode allows to decode both safe and unsafe base64.
         Therefore this function may also be used to decode the regular base64.
@@ -59,6 +77,7 @@ def decode(encoded):
     :rtype: str, bytes
     :return: decoded string
     """
+    padded_string = fill_padding(encoded)
     if PY2:
-        return urlsafe_b64decode(str(encoded).replace('.', '='))
-    return urlsafe_b64decode(bytes(encoded, 'ascii').replace(b'.', b'='))
+        return urlsafe_b64decode(str(padded_string).replace('.', '='))
+    return urlsafe_b64decode(bytes(padded_string, 'ascii').replace(b'.', b'='))

@@ -5,6 +5,7 @@ of `querystringsafe_base64` along its history.
 
 * Michał Pawłowski <https://github.com/not-raspberry>
 * Tomasz Karbownicki <https://github.com/trojkat>
+* Grzegorz Śliwiński
 
 Great thanks to [Clearcode](http://clearcode.cc) for allowing releasing
 `querystringsafe_base64` as free software!

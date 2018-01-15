@@ -113,3 +113,28 @@ def test_querystringsafe_base64_decode_handles_unicode():
     assert querystringsafe_base64.decode(base64_str) == decoded_str
     assert querystringsafe_base64.decode(base64dotted_unicode) == decoded_str
     assert querystringsafe_base64.decode(base64dotted_str) == decoded_str
+
+
+def test_fill_padding_unpadded():
+    """Check that fill_padding will fix padding."""
+    unpadded_string = 'MQ'
+    padded_string = querystringsafe_base64.fill_padding(unpadded_string)
+    assert unpadded_string in padded_string
+    assert len(padded_string) % 4 == 0
+
+
+def test_fill_padding_padded():
+    """Check that fill_padding will fix padding."""
+    padded_string = 'MQ..'
+    assert querystringsafe_base64.fill_padding(padded_string) == padded_string
+
+
+@pytest.mark.parametrize('string_num', test_strings_indices)
+def test_encode_decode_unpad(string_num):
+    """Check if querystringsafe_base64.encode can be reverted by querystringsafe_base64.decode with padding removed."""
+    original = test_strings[string_num]
+
+    encoded = querystringsafe_base64.encode(original)
+    assert encoded.endswith('.')  # make sure it ends with padding for this test
+    decoded = querystringsafe_base64.decode(encoded.rstrip())
+    assert decoded == original

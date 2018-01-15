@@ -1,5 +1,9 @@
 # Changelog
 
+## unreleased
+
+* support for restore missing padding during decode process
+
 ## 0.2.0
 
 * Support for python3
