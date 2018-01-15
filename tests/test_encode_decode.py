@@ -114,6 +114,7 @@ def test_querystringsafe_base64_decode_handles_unicode():
     assert querystringsafe_base64.decode(base64dotted_unicode) == decoded_str
     assert querystringsafe_base64.decode(base64dotted_str) == decoded_str
 
+
 def test_fill_padding_unpadded():
     """Check that fill_padding will fix padding."""
     unpadded_string = 'MQ'

@@ -44,7 +44,6 @@ def fill_padding(padded_string):
     return padded_string
 
 
-
 def encode(to_encode):
     """
     Encode an arbitrary string as a base64 that is safe to put as a URL query value.
