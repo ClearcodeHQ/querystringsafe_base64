@@ -95,26 +95,6 @@ def test_decode_accepts_regular_base64():
         ) == string_encoding_to_base64_with_all_allowed_characters)
 
 
-def test_querystringsafe_base64_decode_handles_unicode():
-    """
-    Base64.urlsafe_b64decode called by querystringsafe_base64.decode complains about unicode being passed.
-
-    Check if querystringsafe_base64.decodefixes it.
-    """
-    base64_unicode = u'DD=='
-    base64_str = str(base64_unicode)
-    base64dotted_unicode = u'DD..'
-    base64dotted_str = str(base64_unicode)
-
-    decoded_str = urlsafe_b64decode(base64_str)
-
-    # querystringsafe_base64.decode handles str and unicode in both formats.
-    assert querystringsafe_base64.decode(base64_unicode) == decoded_str
-    assert querystringsafe_base64.decode(base64_str) == decoded_str
-    assert querystringsafe_base64.decode(base64dotted_unicode) == decoded_str
-    assert querystringsafe_base64.decode(base64dotted_str) == decoded_str
-
-
 def test_fill_padding_unpadded():
     """Check that fill_padding will fix padding."""
     unpadded_string = 'MQ'
