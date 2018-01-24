@@ -24,6 +24,7 @@ from setuptools import setup
 
 here = os.path.dirname(__file__)
 
+
 def read(fname):
     """
     Read given file's content.
