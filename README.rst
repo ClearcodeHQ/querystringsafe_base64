@@ -1,9 +1,9 @@
-.. image:: https://travis-ci.org/ClearcodeHQ/querystringsafe_base64.svg?branch=v1.0.0
+.. image:: https://travis-ci.org/ClearcodeHQ/querystringsafe_base64.svg?branch=v1.1.0
     :target: https://travis-ci.org/ClearcodeHQ/querystringsafe_base64
     :alt: Tests
 
-.. image:: https://coveralls.io/repos/ClearcodeHQ/querystringsafe_base64/badge.png?branch=v1.0.0
-    :target: https://coveralls.io/r/ClearcodeHQ/querystringsafe_base64?branch=v1.0.0
+.. image:: https://coveralls.io/repos/ClearcodeHQ/querystringsafe_base64/badge.png?branch=v1.1.0
+    :target: https://coveralls.io/r/ClearcodeHQ/querystringsafe_base64?branch=v1.1.0
     :alt: Coverage Status
 
 Query string safe Base64

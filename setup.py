@@ -48,7 +48,7 @@ extras_require = {
 
 setup(
     name='querystringsafe_base64',
-    version='1.0.0',
+    version='1.1.0',
     author='Clearcode - The A Room',
     author_email='thearoom@clearcode.cc',
     description='Encoding and decoding arbitrary strings into strings '
