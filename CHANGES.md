@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+* Always expect bytes
+* Add type annotations
+
 ## 1.0.0
 
 * support for restore missing padding during decode process
