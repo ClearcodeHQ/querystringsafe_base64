@@ -1,2 +1,2 @@
-include *.md *.py
+include *.rst *.py
 recursive-include src *.py
