@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright (C) 2016 by Clearcode <http://clearcode.cc>
-# and associates (see AUTHORS.md).
+# and associates (see AUTHORS.rst).
 
 # This file is part of querystringsafe_base64.
 
