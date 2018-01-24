@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+1.1.1
+-------
+
+* Fixed pacakging
+
 1.1.0
 -------
 
