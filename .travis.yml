@@ -9,9 +9,7 @@ python:
 - pypy3
 install:
 - python setup.py install
-- pip install querystringsafe_base64[tests]
-- pip install coveralls
-- pip install wheel
+- pip install querystringsafe_base64[tests] coveralls wheel
 script:
 - py.test --verbose --capture=no --showlocals --cov querystringsafe_base64
 - pylama
@@ -29,3 +27,4 @@ deploy:
     tags: true
     all_branches: true
     repo: ClearcodeHQ/querystringsafe_base64
+  distributions: bdist_wheel
