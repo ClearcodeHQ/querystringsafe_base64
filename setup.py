@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright (C) 2016 by Clearcode <http://clearcode.cc>
-# and associates (see AUTHORS.md).
+# and associates (see AUTHORS.rst).
 
 # This file is part of querystringsafe_base64.
 
@@ -20,47 +20,26 @@
 """querystringsafe_base64's installation module."""
 
 import os
-import re
 from setuptools import setup
 
-
 here = os.path.dirname(__file__)
-with open(
-    os.path.join(here, 'querystringsafe_base64.py')
-) as v_file:
-    package_version = re.compile(
-        r".*__version__ = '(.*?)'", re.S).match(v_file.read()).group(1)
 
 
-try:
-    from pypandoc import convert
+def read(fname):
+    """
+    Read given file's content.
 
-    def read(fname):
-        """
-        Read filename.
-
-        :param str fname: name of a file to read
-        """
-        return convert(os.path.join(here, fname), 'rst')
-except ImportError:
-    print(
-        "warning: pypandoc module not found, could not convert Markdown to RST"
-    )
-
-    def read(fname):
-        """
-        Read filename.
-
-        :param str fname: name of a file to read
-        """
-        return open(os.path.join(here, fname)).read()
+    :param str fname: file name
+    :returns: file contents
+    :rtype: str
+    """
+    return open(os.path.join(here, fname)).read()
 
 
 test_requires = [
     'pytest',
     'pytest-cov',
     'pylama',
-    'pypandoc',
 ]
 
 extras_require = {
@@ -69,13 +48,14 @@ extras_require = {
 
 setup(
     name='querystringsafe_base64',
-    version=package_version,
+    version='1.0.0',
     author='Clearcode - The A Room',
-    author_email='@'.join(['thearoom', 'clearcode.cc']),
+    author_email='thearoom@clearcode.cc',
     description='Encoding and decoding arbitrary strings into strings '
     'that are safe to put into a URL query param.',
-    long_description=read('README.md'),
-
+    long_description=(
+            read('README.rst') + '\n\n' + read('CHANGES.rst')
+    ),
     py_modules=['querystringsafe_base64', ],
 
     url='https://github.com/ClearcodeHQ/querystringsafe_base64',
