@@ -27,6 +27,7 @@ PY2 = sys.version_info < (3, 0)
 
 
 def fill_padding(padded_string):
+    # type: (bytes) -> bytes
     """
     Fill up missing padding in a string.
 
@@ -45,6 +46,7 @@ def fill_padding(padded_string):
 
 
 def encode(to_encode):
+    # type: (bytes) -> bytes
     """
     Encode an arbitrary string as a base64 that is safe to put as a URL query value.
 
@@ -57,13 +59,11 @@ def encode(to_encode):
         string - like base64, except characters ['+', '/', '='] are
         replaced with ['-', '_', '.'] consequently
     """
-    encoded = urlsafe_b64encode(to_encode).replace(b'=', b'.')
-    if PY2:
-        return encoded
-    return encoded.decode()
+    return urlsafe_b64encode(to_encode).replace(b'=', b'.')
 
 
 def decode(encoded):
+    # type: (bytes) -> bytes
     """
     Decode the result of querystringsafe_base64_encode or a regular base64.
 
@@ -79,5 +79,5 @@ def decode(encoded):
     """
     padded_string = fill_padding(encoded)
     if PY2:
-        return urlsafe_b64decode(str(padded_string).replace('.', '='))
-    return urlsafe_b64decode(bytes(padded_string, 'ascii').replace(b'.', b'='))
+        return urlsafe_b64decode(padded_string.replace('.', '='))
+    return urlsafe_b64decode(padded_string.replace(b'.', b'='))
