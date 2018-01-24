@@ -19,7 +19,7 @@
 # along with querystringsafe_base64. If not, see <http://www.gnu.org/licenses/
 """querystringsafe_base64's tests."""
 
-from base64 import b64encode, b64decode, urlsafe_b64decode
+from base64 import b64encode, b64decode
 import string
 try:
     from urllib import quote_plus, unquote_plus
