@@ -115,6 +115,6 @@ def test_encode_decode_unpad(string_num):
     original = test_strings[string_num]
 
     encoded = querystringsafe_base64.encode(original)
-    assert encoded.endswith(b'.')  # make sure it ends with padding for this test
+    assert len(encoded) % 4 != 0  # make sure it would end with padding
     decoded = querystringsafe_base64.decode(encoded.rstrip())
     assert decoded == original
