@@ -4,7 +4,7 @@ CHANGELOG
 1.1.1
 -------
 
-* Fixed pacakging
+* Fixed packaging
 
 1.1.0
 -------
