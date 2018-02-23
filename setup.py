@@ -20,7 +20,7 @@
 """querystringsafe_base64's installation module."""
 
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 here = os.path.dirname(__file__)
 
@@ -56,7 +56,8 @@ setup(
     long_description=(
             read('README.rst') + '\n\n' + read('CHANGES.rst')
     ),
-    py_modules=['querystringsafe_base64', ],
+    package_dir={'': 'src'},
+    packages=find_packages('src'),
 
     url='https://github.com/ClearcodeHQ/querystringsafe_base64',
     include_package_data=True,
