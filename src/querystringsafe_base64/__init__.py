@@ -39,7 +39,7 @@ def fill_padding(padded_string):
     length = len(padded_string)
     reminder = len(padded_string) % 4
     if reminder:
-        return padded_string.ljust(length + 4 - reminder, b'.')
+        return padded_string.ljust(length + 4 - reminder, b'=')
     return padded_string
 
 
@@ -57,7 +57,7 @@ def encode(to_encode):
         string - like base64, except characters ['+', '/', '='] are
         replaced with ['-', '_', '.'] consequently
     """
-    return urlsafe_b64encode(to_encode).replace(b'=', b'.')
+    return urlsafe_b64encode(to_encode).strip(b'=')
 
 
 def decode(encoded):
@@ -76,4 +76,4 @@ def decode(encoded):
     :return: decoded string
     """
     padded_string = fill_padding(encoded)
-    return urlsafe_b64decode(padded_string.replace(b'.', b'='))
+    return urlsafe_b64decode(padded_string)
