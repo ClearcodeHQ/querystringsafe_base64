@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-unreleased
+1.2.0
 -------
 
 * Remove padding characters from encoded string.
